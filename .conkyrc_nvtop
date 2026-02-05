@@ -1,0 +1,42 @@
+conky.config = {
+    alignment = 'top_right',
+    gap_x = 20,
+    gap_y = 40,
+    background = false,
+    double_buffer = true,
+    update_interval = 1.0,
+
+    own_window = true,
+    own_window_type = 'dock',
+    own_window_argb_visual = true,
+    own_window_argb_value = 70,
+
+    minimum_width = 240,
+    maximum_width = 240,
+
+    use_xft = true,
+    font = 'Ubuntu:size=11:bold',
+
+    color0 = '#FFFFFF',
+};
+
+conky.text = [[
+${color0}CPU:${alignr}${cpu cpu0}%
+${if_match ${cpu cpu0} < 60}${color green}${else}${if_match ${cpu cpu0} < 85}${color yellow}${else}${color red}${endif}${endif}${cpubar cpu0 5,240}
+
+${color0}CPU Temp:${alignr}${execi 2 sensors | awk '/Package id 0:/ {gsub("\\+|°C","",$4); print int($4)}'}°C
+${if_match ${execi 2 sensors | awk '/Package id 0:/ {gsub("\\+|°C","",$4); print int($4)}'} < 60}${color green}${else}${if_match ${execi 2 sensors | awk '/Package id 0:/ {gsub("\\+|°C","",$4); print int($4)}'} < 80}${color yellow}${else}${color red}${endif}${endif}${cpubar 5,240}
+
+${color0}CPU Freq:${alignr}${freq_g} GHz
+
+${color0}RAM:${alignr}${memperc}%
+${if_match ${memperc} < 60}${color green}${else}${if_match ${memperc} < 85}${color yellow}${else}${color red}${endif}${endif}${membar 5,240}
+
+${color0}GPU:${alignr}${execi 2 ~/.conky_gpu.py | cut -d'|' -f1}%
+${if_match ${execi 2 ~/.conky_gpu.py | cut -d'|' -f1} < 60}${color green}${else}${if_match ${execi 2 ~/.conky_gpu.py | cut -d'|' -f1} < 85}${color yellow}${else}${color red}${endif}${endif}${execbar 2 bash -c "~/.conky_gpu.py | cut -d'|' -f1" 240}
+
+${color0}GPU Temp:${alignr}${execi 2 ~/.conky_gpu.py | cut -d'|' -f4}°C
+
+${color0}VRAM:${alignr}${execi 2 ~/.conky_gpu.py | cut -d'|' -f3}%
+${if_match ${execi 2 ~/.conky_gpu.py | cut -d'|' -f3} < 60}${color green}${else}${if_match ${execi 2 ~/.conky_gpu.py | cut -d'|' -f3} < 85}${color yellow}${else}${color red}${endif}${endif}${execbar 2 bash -c "~/.conky_gpu.py | cut -d'|' -f3" 240}
+]]
