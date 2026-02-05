@@ -2,6 +2,8 @@
 
 A minimal, modern **GNOME-compatible Conky system HUD** with a universal installer.
 
+A lightweight Conky HUD for Ubuntu GNOME with GPU monitoring, transparent overlay and universal installer.
+
 This project provides a lightweight on-screen system monitor showing:
 
 * CPU usage & temperature
