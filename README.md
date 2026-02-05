@@ -1,3 +1,5 @@
+![Release](https://img.shields.io/github/v/release/JcNavjot/conky-hud)
+
 # 🖥️ Conky HUD
 
 A minimal, modern **GNOME-compatible Conky system HUD** with a universal installer.
